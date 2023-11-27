@@ -1,1 +1,1 @@
-<div>Hello from Svelte</div>
+<div style="background-color: orange;">Hello from Svelte</div>

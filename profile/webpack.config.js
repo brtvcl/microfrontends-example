@@ -21,7 +21,7 @@ module.exports = {
 		path: __dirname + "/public",
 		filename: "[name].js",
 		chunkFilename: "[name].[id].js",
-		publicPath: "http://localhost:8080/",
+		publicPath: "http://localhost:8081/",
 	},
 	module: {
 		rules: [
@@ -49,15 +49,17 @@ module.exports = {
 		],
 	},
 	devServer: {
-		port: 8080,
+		port: 8081,
 	},
 	mode,
 	plugins: [
 		new ModuleFederationPlugin({
-			name: "starter",
+			name: "profile",
 			filename: "remoteEntry.js",
 			remotes: {},
-			exposes: {},
+			exposes: {
+				"./Header": "./src/App.svelte",
+			},
 			shared: require("./package.json").dependencies,
 		}),
 		new MiniCssExtractPlugin({

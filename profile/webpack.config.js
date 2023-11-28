@@ -12,13 +12,13 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
-			svelte: path.resolve("node_modules", "svelte"),
+			svelte: path.resolve("node_modules", "svelte/src/runtime"),
 		},
 		extensions: [".mjs", ".js", ".svelte"],
 		mainFields: ["svelte", "browser", "module", "main"],
 	},
 	output: {
-		path: __dirname + "/public",
+		path: __dirname + "/dist",
 		filename: "[name].js",
 		chunkFilename: "[name].[id].js",
 		publicPath: "http://localhost:8081/",
@@ -34,6 +34,13 @@ module.exports = {
 						hotReload: true,
 					},
 				},
+			},
+			{
+				// required to prevent errors from Svelte on Webpack 5+, omit on Webpack 4
+				test: /node_modules\/svelte\/.*\.mjs$/,
+				resolve: {
+					fullySpecified: false
+				}
 			},
 			{
 				test: /\.css$/,

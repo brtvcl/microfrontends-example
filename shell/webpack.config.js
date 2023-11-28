@@ -2,9 +2,14 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 const deps = require("./package.json").dependencies;
+const mode = process.env.NODE_ENV || "development";
+const prod = mode === "production";
 module.exports = {
   output: {
     publicPath: "http://localhost:8080/",
+    path: __dirname + "/dist",
+    filename: "[name].js",
+    chunkFilename: "[name].[id].js",
   },
 
   resolve: {
@@ -37,7 +42,7 @@ module.exports = {
       },
     ],
   },
-
+  mode,
   plugins: [
     new ModuleFederationPlugin({
       name: "shell",
@@ -60,4 +65,5 @@ module.exports = {
       template: "./src/index.html",
     }),
   ],
+  devtool: prod ? false : "source-map",
 };

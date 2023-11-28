@@ -5,7 +5,21 @@ import "./index.css";
 
 function App() {
 	return (
-		<div style={{ color: 'mediumturquoise' }}>Hi there, I'm React from Webpack 5.</div>
+		<div className="header">
+			<div>
+				Hello from React! I can update Svelte App state
+			</div>
+			<div style={{ marginTop: '1rem' }}>
+				<button onClick={() => {
+					window.increment();
+				}}>Click Me</button>
+			</div>
+			<div style={{ marginTop: '1rem' }}>
+				Count will be updated.<br />
+				👇
+
+			</div>
+		</div>
 	)
 }
 
